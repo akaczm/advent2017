@@ -9,10 +9,10 @@ def next_item(iterable):
     next item, and an item halfway away'''
     citerable = cycle(iterable)
     currents, nexts, mids = tee(citerable, 3)
-    nexts = islice(nexts, 1, None)
-    mid = int(len(iterable)/2)
-    mids = islice(mids, mid, None)
-    return zip(currents, nexts, mids)
+    nexts = islice(nexts, 1, None) #make list with next item
+    mid = int(len(iterable)/2) #determine the midpoint
+    mids = islice(mids, mid, None) #make list with mid item
+    return zip(currents, nexts, mids) #make tuples from lists
 
 def solve_captcha(puzzle_input, matchtype="nexts"):
     '''Solve the advent captcha, supply matchtime
