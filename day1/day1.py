@@ -6,19 +6,26 @@ after the last digit is the first digit in the list.'''
 from itertools import cycle, tee, islice, chain
 
 def next_item(iterable):
-    currents, nexts = tee(iterable, 2)
+    citerable = cycle(iterable)
+    currents, nexts, mids = tee(citerable, 3)
     nexts = islice(nexts, 1, None)
-    return zip(currents, nexts)
+    mid = int(len(iterable)/2)
+    mids = islice(mids, mid, None)
+    return zip(currents, nexts, mids)
 
-def solve_captcha(puzzle_input):
+def solve_captcha(puzzle_input, matchtype="nexts"):
     puzzle_digits = str(puzzle_input)
     
     equal_match = []
     i = 0
-    for current, nxt in next_item(cycle(puzzle_digits)):
+    for current, nxt, mid in next_item(puzzle_digits):
         i += 1
-        if current == nxt:
-            equal_match.append(int(current))
+        if matchtype == "nexts":
+            if current == nxt:
+                equal_match.append(int(current))
+        if matchtype == "mids":
+            if current == mid:
+                equal_match.append(int(current))
         if len(puzzle_digits) <= i:
             break
     if equal_match == []:
