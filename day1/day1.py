@@ -22,7 +22,6 @@ def solve_captcha(puzzle_input):
         if len(puzzle_digits) <= i:
             break
     if equal_match == []:
-        print(0)
         return 0
     else:
         return(sum(equal_match))
