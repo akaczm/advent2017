@@ -10,11 +10,11 @@ def parse_input():
 
 def check_divis(row):
     result = 0
-    for item in row:
-        for i in range(len(row)):
-            divisible = item % row[i]
-            if divisible == 0 and item != row[i]:
-                result += item / row[i]
+    for i in range(len(row)):
+        for ii in range(len(row)):
+            divisible = row[i] % row[ii]
+            if divisible == 0 and i != ii:
+                result += row[i] / row[ii]
     return result
     
 
