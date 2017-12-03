@@ -31,4 +31,5 @@ def calculate_checksum_divis(inpt):
         checksum += check_divis(row)
     print(checksum)
 
+calculate_checksum_minmax(parse_input())
 calculate_checksum_divis(parse_input())
