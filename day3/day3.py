@@ -1,4 +1,5 @@
 from math import sqrt, fabs
+from traverser import ArrayTraverser
 
 def check_corner(i):
     corner = i
@@ -27,9 +28,14 @@ def check_distance(inp):
         distances.append(fabs(corner - inp))
     distance_from_corner = min(distances)
     hor_dist = vertical_dist - distance_from_corner
-    print(distance_from_corner)
-    print(vertical_dist)
     distance = vertical_dist + hor_dist
     print(distance)
+
+    # Part 2
+
+    arrayTraverser = ArrayTraverser(int(side))
+    while arrayTraverser.getcurrentvalue() < inp:
+        arrayTraverser.traverse()
+    print(arrayTraverser.getcurrentvalue())
 
 check_distance(368078)
