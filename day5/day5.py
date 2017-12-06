@@ -1,5 +1,7 @@
+from timeit import default_timer as timer
+
 def parse_input():
-    with open('input.txt') as numbers:
+    with open('task_input.txt') as numbers:
         inputs = []
         for line in numbers:
             inputs.append(int(line))
@@ -20,6 +22,7 @@ def traverse_maze_p1():
             return steps
 
 def traverse_maze_p2():
+    start = timer()
     maze = parse_input()
     i = 0
     steps = 0
@@ -33,6 +36,8 @@ def traverse_maze_p2():
             steps += 1
         except IndexError:
             print(steps)
+            end = timer()
+            print(end - start)
             return steps           
             
 
