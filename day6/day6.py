@@ -1,4 +1,5 @@
 from itertools import cycle, islice
+from timeit import default_timer as timer
 
 def parse_input():
     with open('input.txt') as numbers:
@@ -7,6 +8,7 @@ def parse_input():
         return splitnums
 
 def reallocate():
+    start = timer()
     nums = parse_input()
     print(nums)
     membanks = len(nums)
@@ -30,6 +32,7 @@ def reallocate():
 
     print(abs(arrangements.index(lastarrangement) - i))
     print(i)
-
+    end = timer()
+    print (end - start)
 
 reallocate()
