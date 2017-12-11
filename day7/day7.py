@@ -5,6 +5,7 @@ from anytree import Node, RenderTree, ContStyle
 REGEX_STR = r"(?P<name>^\w+) \((?P<weight>\d+)\)(?P<arrow> ->)?(?(arrow) (?P<children>.+\w+)$)"
 
 def parse_input():
+    '''parse the input using regex and return a dict'''
     outputlist = []
     p = re.compile(REGEX_STR)
     with open('input.txt') as items:
@@ -14,32 +15,39 @@ def parse_input():
     return outputlist
 
 def build_tree():
+    '''Builds a tree, store values in a dictionary'''
     item_list = parse_input()
     treedict = {}
     for item in item_list:
-        try: 
+        try: #if element exists, assign it a weight
+        #object might exist if it's created
+        #as a child in the next statement
             parent = treedict[item['name']]
             parent.weight = item['weight']
-        except KeyError:
+        except KeyError: #otherwise, create element
             treedict[item['name']] = Node(item['name'])
             parent = treedict[item['name']]
             parent.weight = item['weight']
-        
+        #if item has no children, do nothing
         if item['children'] is None:
             pass
         else:
+            #otherwise, fetch children
             children = item['children']
+            #split comma separated values
             children = list(map(str.strip, children.split(',')))
             for child in children:
-                try:
+                try: #set a parent for the child object
+                #if it exists already
                     childnode = treedict[child]
                     childnode.parent = parent
                 except KeyError:
+                    #if it doesn't, create it with the parent assigned
                     treedict[child] = Node(child, parent=parent)
     return treedict
 
 def calculate_weight(nodetree, weight=0):
-    if nodetree.is_leaf:
+    if nodetree.is_leaf: #if it's the last element of a tree
         nodetree.sumweight = int(nodetree.weight)
     weight = int(nodetree.weight)
     for leg in nodetree.descendants:

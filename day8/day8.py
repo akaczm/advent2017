@@ -1,11 +1,13 @@
 import re
 import operator
+import os
 from timeit import default_timer as timer
 
 REGEX_STR = r'^(?P<reg1>\w+)\s(?P<instr>\w+)\s(?P<int>-?\d+)\s(if\s(?P<reg2>\w+)\s(?P<cond>\S+)\s(?P<num>-?\d+))$'
 
 def parse_input():
-    with open('input.txt') as inp:
+    FILENAME = os.path.join(os.path.dirname(__file__), 'input.txt')
+    with open(FILENAME) as inp:
         outputlist = []
         p = re.compile(REGEX_STR)
         for line in inp:
