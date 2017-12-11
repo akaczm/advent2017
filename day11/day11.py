@@ -55,35 +55,11 @@ class HexTraverser(object):
 
     def calculate_return(self):
         steps = 0
-        while (self.coords[0] is not 0 and self.coords[1] is not 0): #First go north or south
-            print(self.coords)
-            if self.coords[0] > self.origin[0]: #Origin is to the NW
-                steps +=1
-                self.move('n') 
-            if self.coords[0] < self.origin[0]: #Origin is to the SE
-                steps +=1
-                self.move('s')
-
-        while (self.coords[1] is not 0 or self.coords[0] is not 0): #go ne or sw as needed
-            print(self.coords)
-            if self.coords[1] is 0:
-                if self.coords[0] > self.origin[0]:
-                    steps +=1
-                    self.move('nw') 
-                if self.coords[0] < self.origin[0]:
-                    steps +=1
-                    self.move('se')
-            elif self.coords[0] is 0:
-                if self.coords[1] > self.origin[1]:
-                    steps +=1
-                    self.move('ne') 
-                if self.coords[1] < self.origin[1]:
-                    steps +=1
-                    self.move('sw')
+        steps = max(map(abs,self.coords))
         return steps
         
 
 hextraverser = HexTraverser()
 
-hextraverser.final_coords()
+print(hextraverser.final_coords())
 print(hextraverser.furthest_coords())
