@@ -42,8 +42,8 @@ def knothash(lengths, current_position=0, skip_size=0, numlist=list(range(256)))
         skip_size += 1
     return(numlist, current_position, skip_size)
 
-def knothash_rounds(rounds):
-    lengths = parse_input_ascii()
+def knothash_rounds(rounds, input):
+    lengths = input
     values = dict()
     values['current_position'] = 0
     values['skip_size'] = 0
@@ -63,7 +63,7 @@ def dense_hash(l, n=16):
         dense_str = dense_str + "%0.2X" % item
     return dense_str
     
-
-hashlist = knothash(parse_input())[0]
-print(hashlist[0] * hashlist[1])
-print(dense_hash(knothash_rounds(64)))
+def calc_hash(input):
+    input = [ord(c) for c in input]
+    input = input + [17, 31, 73, 47, 23]
+    return dense_hash(knothash_rounds(64, input))
