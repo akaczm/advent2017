@@ -114,3 +114,23 @@ grouped = programlist.program_group(0)
 print(len(grouped))
 groups = programlist.get_groups()
 print(len(groups))
+
+#Athalean's dank code
+def get_connected_nodes_for(i):
+    if i == 0:
+        return [1, 2]
+    if i == 1:
+        return [2, 3]
+    if i == 3:
+        return [5]
+    return []
+
+visited = set()
+group = set([0])
+backlog = [0]
+while backlog:
+    print(backlog)
+    current_node = backlog.pop(0)
+    connected_nodes = set(get_connected_nodes_for(current_node))
+    group |= connected_nodes
+    backlog.extend(node for node in (connected_nodes - visited) if node not in backlog)
